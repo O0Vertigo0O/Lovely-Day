@@ -11,44 +11,32 @@ namespace lovely_day
 {
     class Program
     {
+        //Variables
         static int com1 = 0, com2 = 0, com3 = 0;
         static bool run1 = true, run2 = true, run3 = true;
         static Random r = new Random();
         static Rectangle screen = Screen.PrimaryScreen.Bounds;
         static string letterContainer = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890";
         static string[] messageArray = letterContainer.ToCharArray().Select(x => x.ToString()).ToArray();
+
+        //Threads
         static Thread randomMove = new Thread(new ThreadStart(() => DirectionMove(r)));
         static Thread randomType = new Thread(new ThreadStart(() => WriteRandomChars(r, messageArray)));
         static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screen, r)));
 
         static void Main(string[] args)
         {
-            int index = 0;
 
             while (true)
             {
                 string holder = String.Empty;
                 Console.Write("LovelyDay - HID-PNKR /// V0.1.0 written by Elias Öh\n\nAvaliable payloads: \n\nRandom Mouse Movement - 1\nRandom Keyboard Input - 2\nRandom Mouse Warp - 3\n\nEnter attack index: ");
-                try
+                holder = Console.ReadLine(); //get input
+
+                //switch case for input
+                switch (holder)
                 {
-                    holder = Console.ReadLine();
-                    index = int.Parse(holder) - 1;
-                }
-                catch (Exception e)
-                {
-                    if (holder != "exit")
-                    {
-                        Console.WriteLine(":::::::Invalid Input:::::::\n");
-                        continue;
-                    }
-                    else
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-                switch (index)
-                {
-                    case 0:
+                    case "1":
                         {
                             if (com1 == 0)
                             {
@@ -67,7 +55,7 @@ namespace lovely_day
                             }
                         }
                         break;
-                    case 1:
+                    case "2":
                         {
                             if (com2 == 0)
                             {
@@ -86,7 +74,7 @@ namespace lovely_day
                             }
                         }
                         break;
-                    case 2:
+                    case "3":
                         {
                             if (com3 == 0)
                             {
@@ -104,6 +92,13 @@ namespace lovely_day
                                 run3 = true;
                             }
                         }
+                        break;
+                        //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
+                    case "exit":
+                        Application.Exit();
+                        break;
+                    default:
+                        Console.WriteLine(":::::::Invalid Input:::::::\n");
                         break;
                 }
             }
