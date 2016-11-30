@@ -1,0 +1,6 @@
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\bin\Debug\lovely_day.exe.config
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\bin\Debug\lovely_day.exe
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\bin\Debug\lovely_day.pdb
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\obj\Debug\lovely_day.exe
+c:\users\elias.oh\documents\visual studio 2015\Projects\lovely_day\lovely_day\obj\Debug\lovely_day.pdb
