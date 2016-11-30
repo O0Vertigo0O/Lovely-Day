@@ -95,7 +95,7 @@ namespace lovely_day
                         break;
                         //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
                     case "exit":
-                        Application.Exit();
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine(":::::::Invalid Input:::::::\n");

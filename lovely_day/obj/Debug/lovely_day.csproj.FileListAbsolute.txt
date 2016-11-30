@@ -10,3 +10,9 @@ C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovel
 C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.pdb
 C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
 C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.exe.config
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.exe
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.pdb
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.pdb
