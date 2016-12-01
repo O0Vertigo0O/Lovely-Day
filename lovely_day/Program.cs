@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace lovely_day
 {
     class Program
     {
         //Variables
-        static int com1 = 0, com2 = 0, com3 = 0;
-        static bool run1 = true, run2 = true, run3 = true;
+        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0;
+        static bool run1 = true, run2 = true, run3 = true, run4 = true;
         static Random r = new Random();
         static Rectangle screen = Screen.PrimaryScreen.Bounds;
         static string letterContainer = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890";
@@ -23,14 +24,16 @@ namespace lovely_day
         static Thread randomMove = new Thread(new ThreadStart(() => DirectionMove(r)));
         static Thread randomType = new Thread(new ThreadStart(() => WriteRandomChars(r, messageArray)));
         static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screen, r)));
+        static Thread randomClick = new Thread(new ThreadStart(() => ClickMouse(r)));
 
         static void Main(string[] args)
         {
+            messageArray[messageArray.Length - 1] = "{TAB}";
 
             while (true)
             {
-                string holder = String.Empty;
-                Console.Write("LovelyDay - HID-PNKR /// V0.1.0 written by Elias Öh\n\nAvaliable payloads: \n\nRandom Mouse Movement - 1\nRandom Keyboard Input - 2\nRandom Mouse Warp - 3\n\nEnter attack index: ");
+                string holder = string.Empty;
+                Console.Write("LovelyDay - HID-PNKR /// V0.1.0 written by Ergo and Terra \n\nAvaliable payloads: \n\nRandom Mouse Movement - 1\nRandom Keyboard Input - 2\nRandom Mouse Warp - 3\nRandom Mouse Clicks - 4\n\nEnter attack index: ");
                 holder = Console.ReadLine(); //get input
 
                 //switch case for input
@@ -93,7 +96,26 @@ namespace lovely_day
                             }
                         }
                         break;
-                        //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
+                    case "4":
+                        {
+                            if (com4 == 0)
+                            {
+                                randomClick.Start();
+                                com4++;
+                            }
+                            else if (com4 == 1)
+                            {
+                                com4 = 2;
+                                run4 = false;
+                            }
+                            else if (com4 == 2)
+                            {
+                                com4 = 1;
+                                run4 = true;
+                            }
+                        }
+                        break;
+                    //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
                     case "exit":
                         Environment.Exit(0);
                         break;
@@ -132,7 +154,7 @@ namespace lovely_day
                 }
             }
         }
-        
+
         #region Move Mouse
         /// <summary>
         /// Move Mouse to a random point at the screen.
@@ -156,7 +178,7 @@ namespace lovely_day
                     {
                         Cursor.Position = new Point(moveX, moveY);
                     }
-                    Thread.Sleep(r.Next()%400);
+                    Thread.Sleep(r.Next() % 400);
                 }
             }
         }
@@ -253,6 +275,32 @@ namespace lovely_day
             Thread.Sleep(r.Next() % wait * 10);
         }
         #endregion
-    }
 
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, UIntPtr dwExtraInfo);
+
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
+
+        public static void ClickMouse(Random r)
+        {
+            while (run4 == true)
+            {
+                int chance = r.Next()%20;
+                if (chance <= 10)
+                {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    Thread.Sleep(r.Next()%900 + 100); 
+                }
+                else
+                {
+                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    Thread.Sleep(r.Next() % 900 + 100);
+                }
+            }
+        }
+    }
 }
