@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
@@ -13,8 +10,8 @@ namespace lovely_day
     class Program
     {
         //Variables
+        static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true)};
         static int com1 = 0, com2 = 0, com3 = 0, com4 = 0;
-        static bool run1 = true, run2 = true, run3 = true, run4 = true;
         static Random r = new Random();
         static Rectangle screen = Screen.PrimaryScreen.Bounds;
         static string letterContainer = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890";
@@ -29,99 +26,166 @@ namespace lovely_day
         static void Main(string[] args)
         {
             messageArray[messageArray.Length - 1] = "{TAB}";
-
+            Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n");
             while (true)
             {
-                string holder = string.Empty;
-                Console.Write("LovelyDay - HID-PNKR /// V0.1.0 written by Ergo and Terra \n\nAvaliable payloads: \n\nRandom Mouse Movement - 1\nRandom Keyboard Input - 2\nRandom Mouse Warp - 3\nRandom Mouse Clicks - 4\n\nEnter attack index: ");
-                holder = Console.ReadLine(); //get input
+                Console.Write("\nAttack index:> ");
 
-                //switch case for input
-                switch (holder)
+                string[] holder = Console.ReadLine().Split(','); //get input
+
+                for (int i = 0; i < holder.Length; i++)
                 {
-                    case "1":
-                        {
-                            if (com1 == 0)
+                    holder[i] = holder[i].Trim();
+                }
+
+                for (var i = 0; i < holder.Length; i++)
+                {
+                    //switch case for input
+                    switch (holder[i])
+                    {
+                        case "1":
                             {
-                                randomMove.Start();
-                                com1++;
+                                if (com1 == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    randomMove.Start();
+                                    com1++;
+                                }
+                                else if (com1 == 1)
+                                {
+                                    com1 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write("\nStopping DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[0].Reset();
+                                }
+                                else if (com1 == 2)
+                                {
+                                    com1 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[0].Set();
+                                }
                             }
-                            else if (com1 == 1)
+                            break;
+                        case "2":
                             {
-                                com1 = 2;
-                                run1 = false;
+                                if (com2 == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    randomType.Start();
+                                    com2++;
+                                }
+                                else if (com2 == 1)
+                                {
+                                    com2 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write("\nStopping WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[1].Reset();
+                                }
+                                else if (com2 == 2)
+                                {
+                                    com2 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[1].Set();
+                                }
                             }
-                            else if (com1 == 2)
+                            break;
+                        case "3":
                             {
-                                com1 = 1;
-                                run1 = true;
+                                if (com3 == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    randomWarp.Start();
+                                    com3++;
+                                }
+                                else if (com3 == 1)
+                                {
+                                    com3 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write("\nStopping WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[2].Reset();
+                                }
+                                else if (com3 == 2)
+                                {
+                                    com3 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[2].Set();
+                                }
                             }
-                        }
-                        break;
-                    case "2":
-                        {
-                            if (com2 == 0)
+                            break;
+                        case "4":
                             {
-                                randomType.Start();
-                                com2++;
+                                if (com4 == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    randomClick.Start();
+                                    com4++;
+                                }
+                                else if (com4 == 1)
+                                {
+                                    com4 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write("\nStopping ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[3].Reset();
+                                }
+                                else if (com4 == 2)
+                                {
+                                    com4 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[3].Set();
+                                }
                             }
-                            else if (com2 == 1)
+                            break;
+                        case "help":
                             {
-                                com2 = 2;
-                                run2 = false;
+                                Console.Write("------------------------\nUsage: \"Attack index:> <attack index numbers sepparated by commas>\"\n\nAvaliable attacks:\n\n\tAttack index = 1     ->   Move Mouse Randomly\n\n\tAttack index = 2     ->   Random Keyboard Input\n\n\tAttack index = 3     ->   Warp Mouse Around the Monitor\n\n\tAttack index = 4     ->   Random Mouse Clicks\n\n\tAttack index = clear ->   Clear the console, when possible\n\n\tAttack index = exit  ->   Close the program\n------------------------\n");
                             }
-                            else if (com1 == 2)
+                            break;
+                        case "clear":
                             {
-                                com2 = 1;
-                                run2 = true;
+                                try
+                                {
+                                    Console.Clear();
+                                }
+                                catch(Exception e)
+                                {
+                                    Console.Write("\nAn error occured! \nProbably can't clear console...\n");
+                                }
                             }
-                        }
-                        break;
-                    case "3":
-                        {
-                            if (com3 == 0)
+                            break;
+                        //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
+                        case "exit":
                             {
-                                randomWarp.Start();
-                                com3++;
+                                Console.WriteLine("Killing...\n");
+
+                                Environment.Exit(0);
                             }
-                            else if (com3 == 1)
-                            {
-                                com3 = 2;
-                                run3 = false;
-                            }
-                            else if (com3 == 2)
-                            {
-                                com3 = 1;
-                                run3 = true;
-                            }
-                        }
-                        break;
-                    case "4":
-                        {
-                            if (com4 == 0)
-                            {
-                                randomClick.Start();
-                                com4++;
-                            }
-                            else if (com4 == 1)
-                            {
-                                com4 = 2;
-                                run4 = false;
-                            }
-                            else if (com4 == 2)
-                            {
-                                com4 = 1;
-                                run4 = true;
-                            }
-                        }
-                        break;
-                    //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
-                    case "exit":
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Console.WriteLine(":::::::Invalid Input:::::::\n");
-                        break;
+                            break;
+                        default:
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("\n:::::::Invalid Input:::::::");
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            break;
+                    }
                 }
             }
         }
@@ -133,11 +197,10 @@ namespace lovely_day
         /// <param name="args"></param>
         protected static void myHandler(object sender, ConsoleCancelEventArgs args)
         {
-            randomMove.Abort();
-            randomType.Abort();
-            randomWarp.Abort();
+            args.Cancel = true;
         }
 
+        #region Send Keyboard strokes
         /// <summary>
         /// Sends random keyboard strokes.
         /// </summary>
@@ -147,39 +210,36 @@ namespace lovely_day
         {
             while (true)
             {
-                if (run2 == true)
-                {
-                    SendKeys.SendWait(toWrite[(r.Next() % toWrite.Length)]);
-                    Thread.Sleep(10);
-                }
+                handle[1].WaitOne();
+                SendKeys.SendWait(toWrite[r.Next()%toWrite.Length]);
+                Thread.Sleep(10);
             }
         }
+        #endregion
 
         #region Move Mouse
         /// <summary>
         /// Move Mouse to a random point at the screen.
         /// </summary>
         /// <param name="screenBorder">Screen measurements.</param>
-        /// <param name="r"></param>
+        /// <param name="r"></param>)
         public static void WarpMouse(Rectangle screenBorder, Random r)
         {
             while (true)
             {
-                if (run3 == true)
-                {
-                    int moveX = r.Next() % screenBorder.Width, moveY = r.Next() % screenBorder.Height;
-                    int switcher = r.Next() % 20;
+                handle[2].WaitOne();
+                int moveX = r.Next() % screenBorder.Width, moveY = r.Next() % screenBorder.Height;
+                int switcher = r.Next() % 20;
 
-                    if (switcher <= 10)
-                    {
-                        Cursor.Position = new Point(moveX, moveY);
-                    }
-                    else if (switcher >= 11)
-                    {
-                        Cursor.Position = new Point(moveX, moveY);
-                    }
-                    Thread.Sleep(r.Next() % 400);
+                if (switcher <= 10)
+                {
+                    Cursor.Position = new Point(moveX, moveY);
                 }
+                else if (switcher >= 11)
+                {
+                    Cursor.Position = new Point(moveX, moveY);
+                }
+                Thread.Sleep(r.Next() % 400);
             }
         }
 
@@ -191,11 +251,9 @@ namespace lovely_day
         {
             while (true)
             {
-                if (run1 == true)
-                {
-                    int index = r.Next() % 8 + 1;
-                    MoveMouseDirection(index, r);
-                }
+                handle[0].WaitOne();
+                int index = r.Next() % 8 + 1;
+                MoveMouseDirection(index, r);
             }
         }
 
@@ -276,7 +334,7 @@ namespace lovely_day
         }
         #endregion
 
-
+        #region Click Mouse
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, UIntPtr dwExtraInfo);
 
@@ -284,23 +342,32 @@ namespace lovely_day
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
         private const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        private const uint MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const uint MOUSEEVENTF_MIDDLEUP = 0x0040;
 
         public static void ClickMouse(Random r)
         {
-            while (run4 == true)
+            while (true)
             {
-                int chance = r.Next()%20;
+                handle[3].WaitOne();
+                int chance = r.Next() % 20;
                 if (chance <= 10)
                 {
                     mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
-                    Thread.Sleep(r.Next()%900 + 100); 
+                    Thread.Sleep(r.Next() % 500 + 50);
+                }
+                else if(chance <= 20 && chance > 10)
+                {
+                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    Thread.Sleep(r.Next() % 500 + 50);
                 }
                 else
                 {
-                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
-                    Thread.Sleep(r.Next() % 900 + 100);
+                    mouse_event(MOUSEEVENTF_MIDDLEDOWN | MOUSEEVENTF_MIDDLEUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    Thread.Sleep(r.Next() % 500 + 50);
                 }
             }
         }
+        #endregion
     }
 }
