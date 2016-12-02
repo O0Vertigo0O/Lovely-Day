@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Drawing;
+using Console = Colorful.Console; //This makes my heart beat faster
 
 namespace lovely_day
 {
@@ -26,10 +29,11 @@ namespace lovely_day
         static void Main(string[] args)
         {
             messageArray[messageArray.Length - 1] = "{TAB}";
-            Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n");
+            banner(1); //EXPERIMENTAL
+            Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n", Color.LightGray);
             while (true)
             {
-                Console.Write("\nAttack index:> ");
+                Console.Write("\nAttack index:> ", Color.LightGray);
 
                 string[] holder = Console.ReadLine().Split(','); //get input
 
@@ -47,26 +51,20 @@ namespace lovely_day
                             {
                                 if (com1 == 0)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning DirectionMove...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning DirectionMove...\n", Color.Green);
                                     randomMove.Start();
                                     com1++;
                                 }
                                 else if (com1 == 1)
                                 {
                                     com1 = 2;
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("\nStopping DirectionMove...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nStopping DirectionMove...\n", Color.Red);
                                     handle[0].Reset();
                                 }
                                 else if (com1 == 2)
                                 {
                                     com1 = 1;
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning DirectionMove...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning DirectionMove...\n", Color.Green);
                                     handle[0].Set();
                                 }
                             }
@@ -75,26 +73,20 @@ namespace lovely_day
                             {
                                 if (com2 == 0)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning WriteRandomChars...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning WriteRandomChars...\n", Color.Green);
                                     randomType.Start();
                                     com2++;
                                 }
                                 else if (com2 == 1)
                                 {
                                     com2 = 2;
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("\nStopping WriteRandomChars...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nStopping WriteRandomChars...\n", Color.Red);
                                     handle[1].Reset();
                                 }
                                 else if (com2 == 2)
                                 {
                                     com2 = 1;
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning WriteRandomChars...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning WriteRandomChars...\n", Color.Green);
                                     handle[1].Set();
                                 }
                             }
@@ -103,26 +95,20 @@ namespace lovely_day
                             {
                                 if (com3 == 0)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning WarpMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning WarpMouse...\n",Color.Green);
                                     randomWarp.Start();
                                     com3++;
                                 }
                                 else if (com3 == 1)
                                 {
                                     com3 = 2;
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("\nStopping WarpMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nStopping WarpMouse...\n", Color.Red);
                                     handle[2].Reset();
                                 }
                                 else if (com3 == 2)
                                 {
                                     com3 = 1;
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning WarpMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning WarpMouse...\n", Color.Green);
                                     handle[2].Set();
                                 }
                             }
@@ -131,26 +117,20 @@ namespace lovely_day
                             {
                                 if (com4 == 0)
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning ClickMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning ClickMouse...\n", Color.Green);
                                     randomClick.Start();
                                     com4++;
                                 }
                                 else if (com4 == 1)
                                 {
                                     com4 = 2;
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("\nStopping ClickMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nStopping ClickMouse...\n", Color.Red);
                                     handle[3].Reset();
                                 }
                                 else if (com4 == 2)
                                 {
                                     com4 = 1;
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("\nRunning ClickMouse...\n");
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    Console.Write("\nRunning ClickMouse...\n", Color.Green);
                                     handle[3].Set();
                                 }
                             }
@@ -181,9 +161,7 @@ namespace lovely_day
                             }
                             break;
                         default:
-                            Console.BackgroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine("\n:::::::Invalid Input:::::::");
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.WriteLine("\n:::::::Invalid Input:::::::",Color.MediumVioletRed);
                             break;
                     }
                 }
@@ -369,5 +347,81 @@ namespace lovely_day
             }
         }
         #endregion
+
+        /// <summary>
+        /// Draws a cool ascii signature!
+        /// </summary>
+        /// <param name="onAscaleFromOneToTwoHowCoolDoYouWantIt">on a scale From One To Two How Cool Do You Want It?</param>
+        public static void banner(int onAscaleFromOneToTwoHowCoolDoYouWantIt)
+        {
+            if(onAscaleFromOneToTwoHowCoolDoYouWantIt == 1)
+            {
+                Console.WriteLine(@" _______  ______  ______  _____ 
+ |______ |_____/ |  ____ |     |
+ |______ |    \_ |_____| |_____|
+
+	AND
+ _______ _______  ______  ______ _______
+    |    |______ |_____/ |_____/ |_____|
+    |    |______ |    \_ |    \_ |     |", Color.LawnGreen);
+                Console.WriteLine();
+            }
+            else if(onAscaleFromOneToTwoHowCoolDoYouWantIt == 2) {
+                List<string> ergRows = new List<string>();
+                ergRows.Add("@@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@");
+                ergRows.Add("@@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@");
+                ergRows.Add("@@!       @@!  @@@  !@@        @@!  @@@");
+                ergRows.Add("!@!       !@!  @!@  !@!        !@!  @!@");
+                ergRows.Add("@!!!:!    @!@!!@!   !@! @!@!@  @!@  !@!");
+                ergRows.Add("!!!!!:    !!@!@!    !!! !!@!!  !@!  !!!");
+                ergRows.Add("!!:       !!: :!!   :!!   !!:  !!:  !!!");
+                ergRows.Add(":!:       :!:  !:!  :!:   !::  :!:  !:!");
+                ergRows.Add(" :: ::::  ::   :::   ::: ::::  ::::: ::");
+                ergRows.Add(": :: ::    :   : :   :: :: :    : :  : ");
+
+                //rgb(0, 89, 224)
+                int er = 0;
+                int eg = 89;
+                int eb = 224;
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(ergRows[i], Color.FromArgb(er, eg, eb));
+
+                    er += 18;
+                    eb -= 9;
+                }
+
+                Console.WriteLine("",Color.Gray);
+
+                List<string> terRows = new List<string>();
+                terRows.Add("@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
+                terRows.Add("@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@");
+                terRows.Add("  @@!    @@!       @@!  @@@  @@!  @@@  @@!  @@@");
+                terRows.Add("  !@!    !@!       !@!  @!@  !@!  @!@  !@!  @!@");
+                terRows.Add("  @!!    @!!!:!    @!@!!@!   @!@!!@!   @!@!@!@!");
+                terRows.Add("  !!!    !!!!!:    !!@!@!    !!@!@!    !!!@!!!!");
+                terRows.Add("  !!:    !!:       !!: :!!   !!: :!!   !!:  !!!");
+                terRows.Add("  :!:    :!:       :!:  !:!  :!:  !:!  :!:  !:!");
+                terRows.Add("   ::     :: ::::  ::   :::  ::   :::  ::   :::");
+                terRows.Add("   :     : :: ::    :   : :   :   : :   :   : :");
+
+                //rgb(129, 58, 216)
+                int tr = 255;
+                int tg = 255;
+                int tb = 255;
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(terRows[i], Color.FromArgb(tr, tg, tb));
+
+                    tr -= 5;
+                    tb -= 5;
+                    tg -= 5;
+                }
+
+                Console.WriteLine("", Color.Gray);
+                }
+                
+            
+        }
     }
 }

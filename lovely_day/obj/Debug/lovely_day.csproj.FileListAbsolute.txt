@@ -16,3 +16,11 @@ C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.pd
 C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
 C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
 C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.pdb
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.exe.config
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.exe
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.pdb
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.pdb
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\Colorful.Console.dll
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\Colorful.Console.xml
