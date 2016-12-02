@@ -64,11 +64,12 @@ namespace lovely_day
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.TopMost = true;
+
         }
 
         #endregion
@@ -87,7 +88,10 @@ namespace lovely_day
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Random r = new Random();
 
+            Rectangle bounds = Screen.PrimaryScreen.Bounds;
+            Location = new Point(r.Next()%bounds.Width,r.Next()%bounds.Height);
         }
     }
 }

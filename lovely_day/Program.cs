@@ -13,6 +13,7 @@ namespace lovely_day
     class Program
     {
         //Variables
+        public static List<Thread> formCollection = new List<Thread>();
         static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
         static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0;
         static Random r = new Random();
@@ -152,6 +153,11 @@ namespace lovely_day
                                     com5 = 2;
                                     Console.Write("\nStopping ScreenText...\n", Color.Red);
                                     handle[4].Reset();
+                                    for (int j = 0; j < formCollection.Count; j++)
+                                    {
+                                        formCollection[j].Abort();
+                                    }
+                                    
                                 }
                                 else if (com5 == 2)
                                 {
@@ -201,7 +207,12 @@ Avaliable attacks:
                         //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
                         case "exit":
                             {
-                                Console.WriteLine("Killing...\n");
+                                Console.Write("Killing...");
+                                handle[4].Reset();
+                                for (int j = 0; j < formCollection.Count; j++)
+                                {
+                                    formCollection[j].Abort();
+                                }
 
                                 Environment.Exit(0);
                             }
@@ -468,16 +479,13 @@ Avaliable attacks:
             }
         }
 
+        [STAThread]
         public static void ScreenText(){
-            while(true) { 
+            while (true) {
                 handle[4].WaitOne();
-            Application.Run(new Form1());
-            Application.Run(new Form1());
-            Application.Run(new Form1());
-            Application.Run(new Form1());
-            Application.Run(new Form1());
-            Application.Run(new Form1());
-            Application.Run(new Form1());
+                formCollection.Add(new Thread(new ThreadStart(() => Application.Run(new Form1()))));
+                formCollection[formCollection.Count - 1].Start();
+                Thread.Sleep(100);
             }
         }
     }
