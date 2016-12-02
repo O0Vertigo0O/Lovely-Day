@@ -157,7 +157,7 @@ namespace lovely_day
                                     {
                                         formCollection[j].Abort();
                                     }
-                                    
+                                    formCollection = new List<Thread>();
                                 }
                                 else if (com5 == 2)
                                 {
@@ -213,7 +213,6 @@ Avaliable attacks:
                                 {
                                     formCollection[j].Abort();
                                 }
-
                                 Environment.Exit(0);
                             }
                             break;
