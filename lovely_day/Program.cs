@@ -13,8 +13,8 @@ namespace lovely_day
     class Program
     {
         //Variables
-        static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true)};
-        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0;
+        static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
+        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0;
         static Random r = new Random();
         static Rectangle screen = Screen.PrimaryScreen.Bounds;
         static string letterContainer = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890";
@@ -25,11 +25,15 @@ namespace lovely_day
         static Thread randomType = new Thread(new ThreadStart(() => WriteRandomChars(r, messageArray)));
         static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screen, r)));
         static Thread randomClick = new Thread(new ThreadStart(() => ClickMouse(r)));
+        static Thread screenText = new Thread(new ThreadStart(() => ScreenText()));
 
+        [STAThread]
         static void Main(string[] args)
         {
             messageArray[messageArray.Length - 1] = "{TAB}";
+
             banner(1); //EXPERIMENTAL
+
             Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n", Color.LightGray);
             while (true)
             {
@@ -135,9 +139,51 @@ namespace lovely_day
                                 }
                             }
                             break;
+                        case "5":
+                            {
+                                if (com5 == 0)
+                                {
+                                    Console.Write("\nRunning ScreenText...\n", Color.Green);
+                                    screenText.Start();
+                                    com5++;
+                                }
+                                else if (com5 == 1)
+                                {
+                                    com5 = 2;
+                                    Console.Write("\nStopping ScreenText...\n", Color.Red);
+                                    handle[4].Reset();
+                                }
+                                else if (com5 == 2)
+                                {
+                                    com5 = 1;
+                                    Console.Write("\nRunning ScreenText...\n", Color.Green);
+                                    handle[4].Set();
+                                }
+                            }
+                            break;
                         case "help":
                             {
-                                Console.Write("------------------------\nUsage: \"Attack index:> <attack index numbers sepparated by commas>\"\n\nAvaliable attacks:\n\n\tAttack index = 1     ->   Move Mouse Randomly\n\n\tAttack index = 2     ->   Random Keyboard Input\n\n\tAttack index = 3     ->   Warp Mouse Around the Monitor\n\n\tAttack index = 4     ->   Random Mouse Clicks\n\n\tAttack index = clear ->   Clear the console, when possible\n\n\tAttack index = exit  ->   Close the program\n------------------------\n");
+                                //LOOK, IT'S READABLE
+                                Console.Write(@"------------------------
+Usage: Attack index:> < attack index numbers sepparated by commas >
+
+Avaliable attacks:
+
+    Attack index = 1     ->   Move Mouse Randomly
+
+    Attack index = 2     ->   Random Keyboard Input
+
+    Attack index = 3     ->   Warp Mouse Around the Monitor
+
+    Attack index = 4     ->   Random Mouse Clicks
+
+    Attack index = 5     ->   Spawns text on screen
+
+    Attack index = clear ->   Clear the console, when possible
+
+    Attack index = exit  ->   Close the program
+------------------------
+");
                             }
                             break;
                         case "clear":
@@ -354,7 +400,7 @@ namespace lovely_day
         /// <param name="onAscaleFromOneToTwoHowCoolDoYouWantIt">on a scale From One To Two How Cool Do You Want It?</param>
         public static void banner(int onAscaleFromOneToTwoHowCoolDoYouWantIt)
         {
-            if(onAscaleFromOneToTwoHowCoolDoYouWantIt == 1)
+            if (onAscaleFromOneToTwoHowCoolDoYouWantIt == 1)
             {
                 Console.WriteLine(@" _______  ______  ______  _____ 
  |______ |_____/ |  ____ |     |
@@ -366,7 +412,8 @@ namespace lovely_day
     |    |______ |    \_ |    \_ |     |", Color.LawnGreen);
                 Console.WriteLine();
             }
-            else if(onAscaleFromOneToTwoHowCoolDoYouWantIt == 2) {
+            else if (onAscaleFromOneToTwoHowCoolDoYouWantIt == 2)
+            {
                 List<string> ergRows = new List<string>();
                 ergRows.Add("@@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@");
                 ergRows.Add("@@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@");
@@ -391,7 +438,7 @@ namespace lovely_day
                     eb -= 9;
                 }
 
-                Console.WriteLine("",Color.Gray);
+                Console.WriteLine("", Color.Gray);
 
                 List<string> terRows = new List<string>();
                 terRows.Add("@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
@@ -411,17 +458,27 @@ namespace lovely_day
                 int tb = 255;
                 for (int i = 0; i < 10; i++)
                 {
-                    Console.WriteLine(terRows[i], Color.FromArgb(tr, tg, tb));
+                    Console.WriteLine(terRows[i], Color.FromArgb(er, eg, eb));
 
-                    tr -= 5;
-                    tb -= 5;
-                    tg -= 5;
+                    er -= 18;
+                    eb += 9;
                 }
 
                 Console.WriteLine("", Color.Gray);
-                }
-                
-            
+            }
+        }
+
+        public static void ScreenText(){
+            while(true) { 
+                handle[4].WaitOne();
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            Application.Run(new Form1());
+            }
         }
     }
 }
