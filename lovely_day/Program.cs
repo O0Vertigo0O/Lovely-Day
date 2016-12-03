@@ -10,21 +10,21 @@ using Console = Colorful.Console; //This makes my heart beat faster
 
 namespace lovely_day
 {
-    class Program
+    public class Program
     {
         //Variables
         public static List<Thread> formCollection = new List<Thread>();
         static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
         static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0;
         static Random r = new Random();
-        static Rectangle screen = Screen.PrimaryScreen.Bounds;
+        static Screen[] screens = Screen.AllScreens;
         static string letterContainer = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890";
         static string[] messageArray = letterContainer.ToCharArray().Select(x => x.ToString()).ToArray();
-
+        
         //Threads
         static Thread randomMove = new Thread(new ThreadStart(() => DirectionMove(r)));
         static Thread randomType = new Thread(new ThreadStart(() => WriteRandomChars(r, messageArray)));
-        static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screen, r)));
+        static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screens, r)));
         static Thread randomClick = new Thread(new ThreadStart(() => ClickMouse(r)));
         static Thread screenText = new Thread(new ThreadStart(() => ScreenText()));
 
@@ -144,6 +144,7 @@ namespace lovely_day
                             {
                                 if (com5 == 0)
                                 {
+                                    formCollection = new List<Thread>();
                                     Console.Write("\nRunning ScreenText...\n", Color.Green);
                                     screenText.Start();
                                     com5++;
@@ -157,7 +158,6 @@ namespace lovely_day
                                     {
                                         formCollection[j].Abort();
                                     }
-                                    formCollection = new List<Thread>();
                                 }
                                 else if (com5 == 2)
                                 {
@@ -257,12 +257,14 @@ Avaliable attacks:
         /// </summary>
         /// <param name="screenBorder">Screen measurements.</param>
         /// <param name="r"></param>)
-        public static void WarpMouse(Rectangle screenBorder, Random r)
+        public static void WarpMouse(Screen[] screens, Random r)
         {
             while (true)
             {
                 handle[2].WaitOne();
-                int moveX = r.Next() % screenBorder.Width, moveY = r.Next() % screenBorder.Height;
+
+                int index = r.Next(0, screens.Length);
+                int moveX = r.Next(screens[index].WorkingArea.Left, screens[index].WorkingArea.Right), moveY = r.Next(screens[index].WorkingArea.Top, screens[index].WorkingArea.Bottom);
                 int switcher = r.Next() % 20;
 
                 if (switcher <= 10)
@@ -370,7 +372,7 @@ Avaliable attacks:
 
         #region Click Mouse
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, UIntPtr dwExtraInfo);
+        public static extern void mouse_event(uint dwFlags, int dx, int dy, uint cButtons, UIntPtr dwExtraInfo);
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
@@ -387,17 +389,17 @@ Avaliable attacks:
                 int chance = r.Next() % 20;
                 if (chance <= 10)
                 {
-                    mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, Cursor.Position.X, Cursor.Position.Y, 0, new UIntPtr(0));
                     Thread.Sleep(r.Next() % 500 + 50);
                 }
                 else if(chance <= 20 && chance > 10)
                 {
-                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, Cursor.Position.X, Cursor.Position.Y, 0, new UIntPtr(0));
                     Thread.Sleep(r.Next() % 500 + 50);
                 }
                 else
                 {
-                    mouse_event(MOUSEEVENTF_MIDDLEDOWN | MOUSEEVENTF_MIDDLEUP, (uint)Cursor.Position.X, (uint)Cursor.Position.Y, 0, new UIntPtr(0));
+                    mouse_event(MOUSEEVENTF_MIDDLEDOWN | MOUSEEVENTF_MIDDLEUP, Cursor.Position.X, Cursor.Position.Y, 0, new UIntPtr(0));
                     Thread.Sleep(r.Next() % 500 + 50);
                 }
             }

@@ -30,6 +30,17 @@ namespace lovely_day
             base.Dispose(disposing);
         }
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                // turn on WS_EX_TOOLWINDOW style bit
+                cp.ExStyle |= 0x80;
+                return cp;
+            }
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -70,7 +81,8 @@ namespace lovely_day
             this.ResumeLayout(false);
             this.PerformLayout();
             this.ShowInTaskbar = false;
-
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.ShowInTaskbar = false;
         }
 
         #endregion
@@ -90,9 +102,9 @@ namespace lovely_day
         private void Form1_Load(object sender, EventArgs e)
         {
             Random r = new Random();
+            int index = r.Next() % Screen.AllScreens.Length;
 
-            Rectangle bounds = Screen.PrimaryScreen.Bounds;
-            Location = new Point(r.Next()%bounds.Width,r.Next()%bounds.Height);
+            Location = new Point(r.Next(Screen.AllScreens[index].WorkingArea.Left, Screen.AllScreens[index].WorkingArea.Right), r.Next(Screen.AllScreens[index].WorkingArea.Top, Screen.AllScreens[index].WorkingArea.Bottom));
         }
     }
 }
