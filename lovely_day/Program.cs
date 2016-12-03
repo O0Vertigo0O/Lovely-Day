@@ -5,8 +5,6 @@ using System.Drawing;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Drawing;
-using Console = Colorful.Console; //This makes my heart beat faster
 
 namespace lovely_day
 {
@@ -33,12 +31,12 @@ namespace lovely_day
         {
             messageArray[messageArray.Length - 1] = "{TAB}";
 
-            banner(1); //EXPERIMENTAL
+            banner(2); //EXPERIMENTAL
 
-            Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n", Color.LightGray);
+            Console.Write("LovelyDay V0.1.1 Written by Ergo and Terra - \"help\" for instructions\n");
             while (true)
             {
-                Console.Write("\nAttack index:> ", Color.LightGray);
+                Console.Write("\nAttack index:> ");
 
                 string[] holder = Console.ReadLine().Split(','); //get input
 
@@ -56,20 +54,20 @@ namespace lovely_day
                             {
                                 if (com1 == 0)
                                 {
-                                    Console.Write("\nRunning DirectionMove...\n", Color.Green);
+                                    Console.Write("\nRunning DirectionMove...\n");
                                     randomMove.Start();
                                     com1++;
                                 }
                                 else if (com1 == 1)
                                 {
                                     com1 = 2;
-                                    Console.Write("\nStopping DirectionMove...\n", Color.Red);
+                                    Console.Write("\nStopping DirectionMove...\n");
                                     handle[0].Reset();
                                 }
                                 else if (com1 == 2)
                                 {
                                     com1 = 1;
-                                    Console.Write("\nRunning DirectionMove...\n", Color.Green);
+                                    Console.Write("\nRunning DirectionMove...\n");
                                     handle[0].Set();
                                 }
                             }
@@ -78,20 +76,20 @@ namespace lovely_day
                             {
                                 if (com2 == 0)
                                 {
-                                    Console.Write("\nRunning WriteRandomChars...\n", Color.Green);
+                                    Console.Write("\nRunning WriteRandomChars...\n");
                                     randomType.Start();
                                     com2++;
                                 }
                                 else if (com2 == 1)
                                 {
                                     com2 = 2;
-                                    Console.Write("\nStopping WriteRandomChars...\n", Color.Red);
+                                    Console.Write("\nStopping WriteRandomChars...\n");
                                     handle[1].Reset();
                                 }
                                 else if (com2 == 2)
                                 {
                                     com2 = 1;
-                                    Console.Write("\nRunning WriteRandomChars...\n", Color.Green);
+                                    Console.Write("\nRunning WriteRandomChars...\n");
                                     handle[1].Set();
                                 }
                             }
@@ -100,20 +98,20 @@ namespace lovely_day
                             {
                                 if (com3 == 0)
                                 {
-                                    Console.Write("\nRunning WarpMouse...\n",Color.Green);
+                                    Console.Write("\nRunning WarpMouse...\n");
                                     randomWarp.Start();
                                     com3++;
                                 }
                                 else if (com3 == 1)
                                 {
                                     com3 = 2;
-                                    Console.Write("\nStopping WarpMouse...\n", Color.Red);
+                                    Console.Write("\nStopping WarpMouse...\n");
                                     handle[2].Reset();
                                 }
                                 else if (com3 == 2)
                                 {
                                     com3 = 1;
-                                    Console.Write("\nRunning WarpMouse...\n", Color.Green);
+                                    Console.Write("\nRunning WarpMouse...\n");
                                     handle[2].Set();
                                 }
                             }
@@ -122,20 +120,20 @@ namespace lovely_day
                             {
                                 if (com4 == 0)
                                 {
-                                    Console.Write("\nRunning ClickMouse...\n", Color.Green);
+                                    Console.Write("\nRunning ClickMouse...\n");
                                     randomClick.Start();
                                     com4++;
                                 }
                                 else if (com4 == 1)
                                 {
                                     com4 = 2;
-                                    Console.Write("\nStopping ClickMouse...\n", Color.Red);
+                                    Console.Write("\nStopping ClickMouse...\n");
                                     handle[3].Reset();
                                 }
                                 else if (com4 == 2)
                                 {
                                     com4 = 1;
-                                    Console.Write("\nRunning ClickMouse...\n", Color.Green);
+                                    Console.Write("\nRunning ClickMouse...\n");
                                     handle[3].Set();
                                 }
                             }
@@ -145,14 +143,14 @@ namespace lovely_day
                                 if (com5 == 0)
                                 {
                                     formCollection = new List<Thread>();
-                                    Console.Write("\nRunning ScreenText...\n", Color.Green);
+                                    Console.Write("\nRunning ScreenText...\n");
                                     screenText.Start();
                                     com5++;
                                 }
                                 else if (com5 == 1)
                                 {
                                     com5 = 2;
-                                    Console.Write("\nStopping ScreenText...\n", Color.Red);
+                                    Console.Write("\nStopping ScreenText...\n");
                                     handle[4].Reset();
                                     for (int j = 0; j < formCollection.Count; j++)
                                     {
@@ -162,7 +160,7 @@ namespace lovely_day
                                 else if (com5 == 2)
                                 {
                                     com5 = 1;
-                                    Console.Write("\nRunning ScreenText...\n", Color.Green);
+                                    Console.Write("\nRunning ScreenText...\n");
                                     handle[4].Set();
                                 }
                             }
@@ -217,7 +215,7 @@ Avaliable attacks:
                             }
                             break;
                         default:
-                            Console.WriteLine("\n:::::::Invalid Input:::::::",Color.MediumVioletRed);
+                            Console.WriteLine("\n:::::::Invalid Input:::::::");
                             break;
                     }
                 }
@@ -421,22 +419,22 @@ Avaliable attacks:
 	AND
  _______ _______  ______  ______ _______
     |    |______ |_____/ |_____/ |_____|
-    |    |______ |    \_ |    \_ |     |", Color.LawnGreen);
+    |    |______ |    \_ |    \_ |     |");
                 Console.WriteLine();
             }
             else if (onAscaleFromOneToTwoHowCoolDoYouWantIt == 2)
             {
                 List<string> ergRows = new List<string>();
-                ergRows.Add("@@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@");
-                ergRows.Add("@@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@");
-                ergRows.Add("@@!       @@!  @@@  !@@        @@!  @@@");
-                ergRows.Add("!@!       !@!  @!@  !@!        !@!  @!@");
-                ergRows.Add("@!!!:!    @!@!!@!   !@! @!@!@  @!@  !@!");
-                ergRows.Add("!!!!!:    !!@!@!    !!! !!@!!  !@!  !!!");
-                ergRows.Add("!!:       !!: :!!   :!!   !!:  !!:  !!!");
-                ergRows.Add(":!:       :!:  !:!  :!:   !::  :!:  !:!");
-                ergRows.Add(" :: ::::  ::   :::   ::: ::::  ::::: ::");
-                ergRows.Add(": :: ::    :   : :   :: :: :    : :  : ");
+                ergRows.Add("@@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@       @@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
+                ergRows.Add("@@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@      @@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@");
+                ergRows.Add("@@!       @@!  @@@  !@@        @@!  @@@        @@!    @@!       @@!  @@@  @@!  @@@  @@!  @@@");
+                ergRows.Add("!@!       !@!  @!@  !@!        !@!  @!@        !@!    !@!       !@!  @!@  !@!  @!@  !@!  @!@");
+                ergRows.Add("@!!!:!    @!@!!@!   !@! @!@!@  @!@  !@!        @!!    @!!!:!    @!@!!@!   @!@!!@!   @!@!@!@!");
+                ergRows.Add("!!!!!:    !!@!@!    !!! !!@!!  !@!  !!!  AND   !!!    !!!!!:    !!@!@!    !!@!@!    !!!@!!!!");
+                ergRows.Add("!!:       !!: :!!   :!!   !!:  !!:  !!!        !!:    !!:       !!: :!!   !!: :!!   !!:  !!!");
+                ergRows.Add(":!:       :!:  !:!  :!:   !::  :!:  !:!        :!:    :!:       :!:  !:!  :!:  !:!  :!:  !:!");
+                ergRows.Add(" :: ::::  ::   :::   ::: ::::  ::::: ::         ::     :: ::::  ::   :::  ::   :::  ::   :::");
+                ergRows.Add(": :: ::    :   : :   :: :: :    : :  :          :     : :: ::    :   : :   :   : :   :   : :");
 
                 //rgb(0, 89, 224)
                 int er = 0;
@@ -449,8 +447,7 @@ Avaliable attacks:
                     er += 18;
                     eb -= 9;
                 }
-
-                Console.WriteLine("", Color.Gray);
+                
 
                 List<string> terRows = new List<string>();
                 terRows.Add("@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
@@ -470,13 +467,31 @@ Avaliable attacks:
                 int tb = 255;
                 for (int i = 0; i < 10; i++)
                 {
-                    Console.WriteLine(terRows[i], Color.FromArgb(er, eg, eb));
+                    //Console.WriteLine(terRows[i], Color.FromArgb(er, eg, eb));
 
-                    er -= 18;
-                    eb += 9;
+                    tr -= 18;
+                    tb += 9;
                 }
 
-                Console.WriteLine("", Color.Gray);
+                List<string> lovRows = new List<string>();
+                lovRows.Add("-------------------------------------------------------------------------------------\n");
+                lovRows.Add(@"██╗      ██████╗ ██╗   ██╗███████╗██╗  ██╗   ██╗    ██████╗  █████╗ ██╗   ██╗");
+                lovRows.Add(@"██║     ██╔═══██╗██║   ██║██╔════╝██║  ╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝");
+                lovRows.Add(@"██║     ██║   ██║██║   ██║█████╗  ██║   ╚████╔╝     ██║  ██║███████║ ╚████╔╝ ");
+                lovRows.Add(@"██║     ██║   ██║╚██╗ ██╔╝██╔══╝  ██║    ╚██╔╝      ██║  ██║██╔══██║  ╚██╔╝");
+                lovRows.Add(@"███████╗╚██████╔╝ ╚████╔╝ ███████╗███████╗██║       ██████╔╝██║  ██║   ██║   ");
+                lovRows.Add(@"╚══════╝ ╚═════╝   ╚═══╝  ╚══════╝╚══════╝╚═╝       ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ");
+
+                int lr = 105;
+                int lg = 155;
+                int lb = 92;
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.WriteLine(lovRows[i], Color.FromArgb(lr, lg, lb));
+
+                    lg -= 18;
+                    lb += 9;
+                }
             }
         }
 
