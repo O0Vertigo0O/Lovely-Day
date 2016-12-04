@@ -22,8 +22,6 @@ D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\lovely_day.pdb
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.pdb
-D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\Colorful.Console.dll
-D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\bin\Debug\Colorful.Console.xml
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\bin\Debug\lovely_day.exe.config
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.exe
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.pdb
@@ -34,3 +32,5 @@ C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\bin\Debug\C
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.csprojResolveAssemblyReference.cache
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
+D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
