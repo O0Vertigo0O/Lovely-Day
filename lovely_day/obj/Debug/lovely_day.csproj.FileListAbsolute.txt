@@ -34,3 +34,5 @@ C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\l
 C:\Users\elias.oh\Documents\Visual Studio 2015\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
+C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
