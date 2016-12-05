@@ -48,7 +48,7 @@ namespace lovely_day
 
             bool bypassGate = false;
 
-            Console.Write("LovelyDay V0.5.6 Written by Ergo and Terra - \"help\" for instructions\n");
+            Console.Write("\nLovelyDay V0.5.6 Written by Ergo and Terra - \"help\" for instructions\n");
             while (true)
             {
                 if (!bypassGate)
@@ -77,20 +77,26 @@ namespace lovely_day
                             {
                                 if (com1 == 0)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     randomMove.Start();
                                     com1++;
                                 }
                                 else if (com1 == 1)
                                 {
                                     com1 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[0].Reset();
                                 }
                                 else if (com1 == 2)
                                 {
                                     com1 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nRunning DirectionMove...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[0].Set();
                                 }
                             }
@@ -99,20 +105,26 @@ namespace lovely_day
                             {
                                 if (com2 == 0)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     randomType.Start();
                                     com2++;
                                 }
                                 else if (com2 == 1)
                                 {
                                     com2 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[1].Reset();
                                 }
                                 else if (com2 == 2)
                                 {
                                     com2 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WriteRandomChars...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[1].Set();
                                 }
                             }
@@ -121,20 +133,26 @@ namespace lovely_day
                             {
                                 if (com3 == 0)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     randomWarp.Start();
                                     com3++;
                                 }
                                 else if (com3 == 1)
                                 {
                                     com3 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[2].Reset();
                                 }
                                 else if (com3 == 2)
                                 {
                                     com3 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WarpMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[2].Set();
                                 }
                             }
@@ -143,20 +161,26 @@ namespace lovely_day
                             {
                                 if (com4 == 0)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     randomClick.Start();
                                     com4++;
                                 }
                                 else if (com4 == 1)
                                 {
                                     com4 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[3].Reset();
                                 }
                                 else if (com4 == 2)
                                 {
                                     com4 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ClickMouse...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[3].Set();
                                 }
                             }
@@ -166,14 +190,18 @@ namespace lovely_day
                                 if (com5 == 0)
                                 {
                                     formCollection = new List<Thread>();
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ScreenText...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     screenText.Start();
                                     com5++;
                                 }
                                 else if (com5 == 1)
                                 {
                                     com5 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ScreenText...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[4].Reset();
                                     cts.Cancel();
                                 }
@@ -181,7 +209,9 @@ namespace lovely_day
                                 {
                                     cts.Dispose();
                                     com5 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ScreenText...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
                                     cts = new CancellationTokenSource();
                                     formCollection = new List<Thread>();
                                     handle[4].Set();
@@ -209,6 +239,8 @@ Avaliable attacks:
     Attack index = clear ->   Clear the console, when possible
 
     Attack index = exit  ->   Close the program
+    
+    Attack index = havoc ->   EVERYTHING AT ONCE
 ------------------------
 ");
                             }
@@ -221,8 +253,8 @@ Avaliable attacks:
                                 }
                                 catch (Exception e)
                                 {
-                                    Console.Write("\nAn error occured! \nProbably can't clear console...\n");
-                                }
+                                    Console.Write("\nAn error occured! \nProbably can't clear console...\n" + e.Message);
+                                } 
                             }
                             break;
                         case "havoc":
@@ -296,7 +328,6 @@ Avaliable attacks:
             {
                 handle[1].WaitOne();
                 SendKeys.SendWait(toWrite[r.Next() % toWrite.Length]);
-                Thread.Sleep(10);
             }
         }
         #endregion
@@ -469,16 +500,16 @@ Avaliable attacks:
             else if (onAscaleFromOneToTwoHowCoolDoYouWantIt == 2)
             {
                 List<string> ergRows = new List<string>();
-                ergRows.Add("@@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@       @@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
-                ergRows.Add("@@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@      @@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@");
-                ergRows.Add("@@!       @@!  @@@  !@@        @@!  @@@        @@!    @@!       @@!  @@@  @@!  @@@  @@!  @@@");
-                ergRows.Add("!@!       !@!  @!@  !@!        !@!  @!@        !@!    !@!       !@!  @!@  !@!  @!@  !@!  @!@");
-                ergRows.Add("@!!!:!    @!@!!@!   !@! @!@!@  @!@  !@!        @!!    @!!!:!    @!@!!@!   @!@!!@!   @!@!@!@!");
-                ergRows.Add("!!!!!:    !!@!@!    !!! !!@!!  !@!  !!!  AND   !!!    !!!!!:    !!@!@!    !!@!@!    !!!@!!!!");
-                ergRows.Add("!!:       !!: :!!   :!!   !!:  !!:  !!!        !!:    !!:       !!: :!!   !!: :!!   !!:  !!!");
-                ergRows.Add(":!:       :!:  !:!  :!:   !::  :!:  !:!        :!:    :!:       :!:  !:!  :!:  !:!  :!:  !:!");
-                ergRows.Add(" :: ::::  ::   :::   ::: ::::  ::::: ::         ::     :: ::::  ::   :::  ::   :::  ::   :::");
-                ergRows.Add(": :: ::    :   : :   :: :: :    : :  :          :     : :: ::    :   : :   :   : :   :   : :");
+                ergRows.Add(" @@@@@@@@  @@@@@@@    @@@@@@@@   @@@@@@       @@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@    @@@@@@ ");
+                ergRows.Add(" @@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@      @@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@");
+                ergRows.Add(" @@!       @@!  @@@  !@@        @@!  @@@        @@!    @@!       @@!  @@@  @@!  @@@  @@!  @@@");
+                ergRows.Add(" !@!       !@!  @!@  !@!        !@!  @!@        !@!    !@!       !@!  @!@  !@!  @!@  !@!  @!@");
+                ergRows.Add(" @!!!:!    @!@!!@!   !@! @!@!@  @!@  !@!        @!!    @!!!:!    @!@!!@!   @!@!!@!   @!@!@!@!");
+                ergRows.Add(" !!!!!:    !!@!@!    !!! !!@!!  !@!  !!!  AND   !!!    !!!!!:    !!@!@!    !!@!@!    !!!@!!!!");
+                ergRows.Add(" !!:       !!: :!!   :!!   !!:  !!:  !!!        !!:    !!:       !!: :!!   !!: :!!   !!:  !!!");
+                ergRows.Add(" :!:       :!:  !:!  :!:   !::  :!:  !:!        :!:    :!:       :!:  !:!  :!:  !:!  :!:  !:!");
+                ergRows.Add("  :: ::::  ::   :::   ::: ::::  ::::: ::         ::     :: ::::  ::   :::  ::   :::  ::   :::");
+                ergRows.Add(" : :: ::    :   : :   :: :: :    : :  :          :     : :: ::    :   : :   :   : :   :   : :");
 
                 //rgb(0, 89, 224)
                 int er = 0;
@@ -494,25 +525,20 @@ Avaliable attacks:
 
                 List<string> lovRows = new List<string>();
                 lovRows.Add("-------------------------------------------------------------------------------------\n");
-                lovRows.Add(@"██╗      ██████╗ ██╗   ██╗███████╗██╗  ██╗   ██╗    ██████╗  █████╗ ██╗   ██╗");
-                lovRows.Add(@"██║     ██╔═══██╗██║   ██║██╔════╝██║  ╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝");
-                lovRows.Add(@"██║     ██║   ██║██║   ██║█████╗  ██║   ╚████╔╝     ██║  ██║███████║ ╚████╔╝ ");
-                lovRows.Add(@"██║     ██║   ██║╚██╗ ██╔╝██╔══╝  ██║    ╚██╔╝      ██║  ██║██╔══██║  ╚██╔╝  ");
-                lovRows.Add(@"███████╗╚██████╔╝ ╚████╔╝ ███████╗███████╗██║       ██████╔╝██║  ██║   ██║   ");
-                lovRows.Add(@"╚══════╝ ╚═════╝   ╚═══╝  ╚══════╝╚══════╝╚═╝       ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ");
+                lovRows.Add(@"  ██╗      ██████╗ ██╗   ██╗███████╗██╗  ██╗   ██╗    ██████╗  █████╗ ██╗   ██╗");
+                lovRows.Add(@"  ██║     ██╔═══██╗██║   ██║██╔════╝██║  ╚██╗ ██╔╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝");
+                lovRows.Add(@"  ██║     ██║   ██║██║   ██║█████╗  ██║   ╚████╔╝     ██║  ██║███████║ ╚████╔╝ ");
+                lovRows.Add(@"  ██║     ██║   ██║╚██╗ ██╔╝██╔══╝  ██║    ╚██╔╝      ██║  ██║██╔══██║  ╚██╔╝  ");
+                lovRows.Add(@"  ███████╗╚██████╔╝ ╚████╔╝ ███████╗███████╗██║       ██████╔╝██║  ██║   ██║   ");
+                lovRows.Add(@"  ╚══════╝ ╚═════╝   ╚═══╝  ╚══════╝╚══════╝╚═╝       ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ");
 
-                int lr = 105;
-                int lg = 155;
-                int lb = 92;
                 for (int i = 0; i < 7; i++)
                 {
-                    Console.WriteLine(lovRows[i], Color.FromArgb(lr, lg, lb));
-
-                    lg -= 18;
-                    lb += 9;
+                    Console.WriteLine(lovRows[i]);
                 }
             }
         }
+
 
         [STAThread]
         public static void ScreenText()
