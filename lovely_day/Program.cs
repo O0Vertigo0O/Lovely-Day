@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Media;
 
 namespace lovely_day
 {
@@ -15,8 +16,8 @@ namespace lovely_day
         public static List<Thread> formCollection = new List<Thread>();
         public static CancellationTokenSource cts = new CancellationTokenSource();
         static System.Timers.Timer spacer = new System.Timers.Timer(100);
-        static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
-        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0;
+        static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
+        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0, com6 = 0;
         static Random r = new Random();
         static Screen[] screens = Screen.AllScreens;
         static string[] messageArray = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890".ToCharArray().Select(x => x.ToString()).ToArray();
@@ -27,6 +28,8 @@ namespace lovely_day
         static Thread randomWarp = new Thread(new ThreadStart(() => WarpMouse(screens, r)));
         static Thread randomClick = new Thread(new ThreadStart(() => ClickMouse(r)));
         static Thread screenText = new Thread(new ThreadStart(() => ScreenText()));
+        static Thread errorSound1 = new Thread(new ThreadStart(() => ErrorSound1()));
+        static Thread errorSound2 = new Thread(new ThreadStart(() => ErrorSound2()));
 
         [DllImport("kernel32.dll")]
         static extern IntPtr GetConsoleWindow();
@@ -218,6 +221,35 @@ namespace lovely_day
                                 }
                             }
                             break;
+                        case "6": 
+                            {
+                                if (com5 == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning ErrorSounds...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    errorSound1.Start();
+                                    errorSound2.Start();
+                                    com5++;
+                                }
+                                else if (com5 == 1)
+                                {
+                                    com5 = 2;
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.Write("\nStopping ErrorSounds...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[5].Reset();
+                                }
+                                else if (com5 == 2)
+                                {
+                                    com5 = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("\nRunning ErrorSounds...\n");
+                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                    handle[5].Set();
+                                }
+                            }
+                            break;
                         case "help":
                             {
                                 //LOOK, IT'S READABLE
@@ -235,6 +267,8 @@ Avaliable attacks:
     Attack index = 4     ->   Random Mouse Clicks
 
     Attack index = 5     ->   Spawns text on screen
+
+    Attack index = 6     ->   Plays Error Sounds
 
     Attack index = clear ->   Clear the console, when possible
 
@@ -550,6 +584,27 @@ Avaliable attacks:
                 formCollection.Add(new Thread(new ThreadStart(() => Application.Run(new Form1(cts.Token)))));
                 formCollection[formCollection.Count - 1].Start();
                 Thread.Sleep(100);
+            }
+        }
+
+        public static void ErrorSound1()
+        {
+            while (true)
+            {
+                handle[5].WaitOne();
+                Random r = new Random();
+                SystemSounds.Exclamation.Play();
+                Thread.Sleep(r.Next(200, 800));
+            }
+        }
+        public static void ErrorSound2()
+        {
+            while (true)
+            {
+                handle[5].WaitOne();
+                Random r = new Random();
+                SystemSounds.Hand.Play();
+                Thread.Sleep(r.Next(200, 800));
             }
         }
     }

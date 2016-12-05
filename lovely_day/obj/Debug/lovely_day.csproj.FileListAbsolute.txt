@@ -36,3 +36,5 @@ D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resou
 D:\Admin\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
 C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
 C:\Users\elias.oh\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
+C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.Form1.resources
+C:\Users\vidar.tedenbrant\Documents\GitHub\Lovely-Day\lovely_day\obj\Debug\lovely_day.csproj.GenerateResource.Cache
