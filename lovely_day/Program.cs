@@ -17,7 +17,7 @@ namespace lovely_day
         public static CancellationTokenSource cts = new CancellationTokenSource();
         static System.Timers.Timer spacer = new System.Timers.Timer(100);
         static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
-        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0, com6 = 0;
+        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0, com6 = 0; 
         static Random r = new Random();
         static Screen[] screens = Screen.AllScreens;
         static string[] messageArray = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890".ToCharArray().Select(x => x.ToString()).ToArray();
@@ -223,26 +223,26 @@ namespace lovely_day
                             break;
                         case "6": 
                             {
-                                if (com5 == 0)
+                                if (com6 == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     errorSound1.Start();
                                     errorSound2.Start();
-                                    com5++;
+                                    com6++;
                                 }
-                                else if (com5 == 1)
+                                else if (com6 == 1)
                                 {
-                                    com5 = 2;
+                                    com6 = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[5].Reset();
                                 }
-                                else if (com5 == 2)
+                                else if (com6 == 2)
                                 {
-                                    com5 = 1;
+                                    com6 = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -296,7 +296,7 @@ Avaliable attacks:
                                 if (HavocMode())
                                 {
                                     bypassGate = true;
-                                    holder = "1,2,3,4,5".Split(',');
+                                    holder = "1,2,3,4,5,6".Split(',');
                                 }
                                 else
                                 {
@@ -594,6 +594,7 @@ Avaliable attacks:
                 handle[5].WaitOne();
                 Random r = new Random();
                 SystemSounds.Exclamation.Play();
+                SystemSounds.Asterisk.Play();
                 Thread.Sleep(r.Next(200, 800));
             }
         }
