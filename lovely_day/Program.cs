@@ -17,7 +17,8 @@ namespace lovely_day
         public static CancellationTokenSource cts = new CancellationTokenSource();
         static System.Timers.Timer spacer = new System.Timers.Timer(100);
         static ManualResetEvent[] handle = new ManualResetEvent[] { new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true), new ManualResetEvent(true) };
-        static int com1 = 0, com2 = 0, com3 = 0, com4 = 0, com5 = 0, com6 = 0; 
+        static int[] com = new int[] { 0, 0, 0, 0, 0, 0 };
+        static string[] comName = new string[] { "DirectionMove", "WriteRandomChars", "WarpMouse", "ClickMouse", "ScreenText", "ErrorSounds" };
         static Random r = new Random();
         static Screen[] screens = Screen.AllScreens;
         static string[] messageArray = "ABCDEFGHIJKLMNOPQRSTUVXZabcdefghijklmnopqrstuvxyz1234567890".ToCharArray().Select(x => x.ToString()).ToArray();
@@ -51,7 +52,7 @@ namespace lovely_day
 
             bool bypassGate = false;
 
-            Console.Write("\nLovelyDay V0.5.6 Written by Ergo and Terra - \"help\" for instructions\n");
+            Console.Write("\nLovelyDay V0.5.7 Written by Ergo and Terra - \"help\" for instructions\n");
             while (true)
             {
                 if (!bypassGate)
@@ -78,26 +79,26 @@ namespace lovely_day
                     {
                         case "1":
                             {
-                                if (com1 == 0)
+                                if (com[0] == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning DirectionMove...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     randomMove.Start();
-                                    com1++;
+                                    com[0]++;
                                 }
-                                else if (com1 == 1)
+                                else if (com[0] == 1)
                                 {
-                                    com1 = 2;
+                                    com[0] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping DirectionMove...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[0].Reset();
                                 }
-                                else if (com1 == 2)
+                                else if (com[0] == 2)
                                 {
-                                    com1 = 1;
-                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    com[0] = 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning DirectionMove...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[0].Set();
@@ -106,25 +107,25 @@ namespace lovely_day
                             break;
                         case "2":
                             {
-                                if (com2 == 0)
+                                if (com[1] == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WriteRandomChars...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     randomType.Start();
-                                    com2++;
+                                    com[1]++;
                                 }
-                                else if (com2 == 1)
+                                else if (com[1] == 1)
                                 {
-                                    com2 = 2;
+                                    com[1] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping WriteRandomChars...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[1].Reset();
                                 }
-                                else if (com2 == 2)
+                                else if (com[1] == 2)
                                 {
-                                    com2 = 1;
+                                    com[1] = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WriteRandomChars...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -134,25 +135,25 @@ namespace lovely_day
                             break;
                         case "3":
                             {
-                                if (com3 == 0)
+                                if (com[2] == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WarpMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     randomWarp.Start();
-                                    com3++;
+                                    com[2]++;
                                 }
-                                else if (com3 == 1)
+                                else if (com[2] == 1)
                                 {
-                                    com3 = 2;
+                                    com[2] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping WarpMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[2].Reset();
                                 }
-                                else if (com3 == 2)
+                                else if (com[2] == 2)
                                 {
-                                    com3 = 1;
+                                    com[2] = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning WarpMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -162,25 +163,25 @@ namespace lovely_day
                             break;
                         case "4":
                             {
-                                if (com4 == 0)
+                                if (com[3] == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ClickMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     randomClick.Start();
-                                    com4++;
+                                    com[3]++;
                                 }
-                                else if (com4 == 1)
+                                else if (com[3] == 1)
                                 {
-                                    com4 = 2;
+                                    com[3] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ClickMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[3].Reset();
                                 }
-                                else if (com4 == 2)
+                                else if (com[3] == 2)
                                 {
-                                    com4 = 1;
+                                    com[3] = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ClickMouse...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -190,28 +191,28 @@ namespace lovely_day
                             break;
                         case "5":
                             {
-                                if (com5 == 0)
+                                if (com[4] == 0)
                                 {
                                     formCollection = new List<Thread>();
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ScreenText...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     screenText.Start();
-                                    com5++;
+                                    com[4]++;
                                 }
-                                else if (com5 == 1)
+                                else if (com[4] == 1)
                                 {
-                                    com5 = 2;
+                                    com[4] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ScreenText...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[4].Reset();
                                     cts.Cancel();
                                 }
-                                else if (com5 == 2)
+                                else if (com[4] == 2)
                                 {
                                     cts.Dispose();
-                                    com5 = 1;
+                                    com[4] = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ScreenText...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -223,26 +224,26 @@ namespace lovely_day
                             break;
                         case "6": 
                             {
-                                if (com6 == 0)
+                                if (com[5] == 0)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     errorSound1.Start();
                                     errorSound2.Start();
-                                    com6++;
+                                    com[5]++;
                                 }
-                                else if (com6 == 1)
+                                else if (com[5] == 1)
                                 {
-                                    com6 = 2;
+                                    com[5] = 2;
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.Write("\nStopping ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     handle[5].Reset();
                                 }
-                                else if (com6 == 2)
+                                else if (com[5] == 2)
                                 {
-                                    com6 = 1;
+                                    com[5] = 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.Write("\nRunning ErrorSounds...\n");
                                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -275,6 +276,8 @@ Avaliable attacks:
     Attack index = exit  ->   Close the program
     
     Attack index = havoc ->   EVERYTHING AT ONCE
+
+    Attack index = pstat ->   View active threads
 ------------------------
 ");
                             }
@@ -293,7 +296,7 @@ Avaliable attacks:
                             break;
                         case "havoc":
                             {
-                                if (HavocMode())
+                                if (ActivateHavocMode())
                                 {
                                     bypassGate = true;
                                     holder = "1,2,3,4,5,6".Split(',');
@@ -304,10 +307,39 @@ Avaliable attacks:
                                 }
                             }
                             break;
+                        case "stat":
+                            {
+                                for (var proc = 0; proc < com.Length; proc++)
+                                {
+                                    if(com[proc] == 1)
+                                    {
+                                        Console.Write("\n-------------------------------------------------\n\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.Write("Status of {0}     \t-  ", comName[proc]);
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.Write("\tACTIVE");
+                                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                        Console.Write("  \t    [ATTACK_ID: {0}]\n", proc + 1);
+                                        Console.ForegroundColor = ConsoleColor.Gray;
+                                    }
+                                    else
+                                    {
+                                        Console.Write("\n-------------------------------------------------\n\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.Write("Status of {0}     \t-  ", comName[proc]);
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.Write("\tDISABLED");
+                                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                        Console.Write("  \t    [ATTACK_ID: {0}]\n", proc + 1);
+                                        Console.ForegroundColor = ConsoleColor.Gray;
+                                    }
+                                }
+                            }
+                            break;
                         //EXIT STATEMENT - ALL OTHER STATEMETS GO ABOVE THIS
                         case "exit":
                             {
-                                Console.Write("Killing...");
+                                Console.Write("Killing...\n");
                                 for (int j = 0; j < handle.Length - 1; j++)
                                 {
                                     handle[i].Reset();
@@ -336,7 +368,7 @@ Avaliable attacks:
             args.Cancel = true;
         }
 
-        public static bool HavocMode()
+        public static bool ActivateHavocMode()
         {
             Console.Write("\n\nAre you sure? Capital \"YES\" to confirm: ");
             string rouge = Console.ReadLine();
@@ -595,7 +627,7 @@ Avaliable attacks:
                 Random r = new Random();
                 SystemSounds.Exclamation.Play();
                 SystemSounds.Asterisk.Play();
-                Thread.Sleep(r.Next(200, 800));
+                Thread.Sleep(r.Next(210, 800));
             }
         }
         public static void ErrorSound2()

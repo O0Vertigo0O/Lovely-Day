@@ -63,9 +63,10 @@ namespace lovely_day
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 31);
+            this.label1.Size = new System.Drawing.Size(1326, 31);
             this.label1.TabIndex = 0;
-            this.label1.Text = "GET REKT";
+            this.label1.Text = "I hope that you currently are in a position less preferable then the position tha" +
+    "t you were previously in";
             // 
             // timer1
             // 
@@ -79,7 +80,7 @@ namespace lovely_day
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(161, 34);
+            this.ClientSize = new System.Drawing.Size(1325, 34);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
