@@ -277,7 +277,7 @@ Avaliable attacks:
     
     Attack index = havoc ->   EVERYTHING AT ONCE
 
-    Attack index = pstat ->   View active threads
+    Attack index = stat ->   View active threads
 ------------------------
 ");
                             }
