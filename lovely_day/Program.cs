@@ -68,7 +68,21 @@ namespace lovely_day
                 }
                 else
                 {
+                    string activationString = string.Empty;
                     bypassGate = false;
+                    for (int i = 0; i < com.Length; i++)
+                    {
+                        if (com[i] == 0)
+                        {
+                            activationString += ((i + 1).ToString() + ",");
+                        }
+                        else if (com[i] == 2)
+                        {
+                            handle[i].Set();
+                        }
+                    }
+                    activationString = activationString.Substring(0, activationString.Length - 1);
+                    holder = activationString.Split(',');
                     ShowWindow(windowHandle, SW_HIDE);
                 }
 
@@ -277,7 +291,7 @@ Avaliable attacks:
     
     Attack index = havoc ->   EVERYTHING AT ONCE
 
-    Attack index = stat ->   View active threads
+    Attack index = stat  ->   View active threads
 ------------------------
 ");
                             }
@@ -299,7 +313,6 @@ Avaliable attacks:
                                 if (ActivateHavocMode())
                                 {
                                     bypassGate = true;
-                                    holder = "1,2,3,4,5,6".Split(',');
                                 }
                                 else
                                 {
